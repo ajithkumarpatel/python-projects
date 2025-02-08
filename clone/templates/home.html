@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Instagram Clone</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, {{ username }}</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" required>
+      <input type="text" name="caption" placeholder="Enter a caption" required>
+      <button type="submit">Post</button>
+    </form>
+    <hr>
+    <h3>Posts Feed</h3>
+    {% for post in posts %}
+      <div class="post">
+        <img src="{{ url_for('static', filename='images/' + post.image) }}" alt="Post image">
+        <p>{{ post.caption }}<br><small>by {{ post.username }}</small></p>
+      </div>
+    {% endfor %}
+    <p>
+      <a href="/reels.html">Watch Reels</a> | 
+      <a href="/logout">Logout</a>
+    </p>
+  </div>
+</body>
+</html>
